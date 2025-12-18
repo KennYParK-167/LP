@@ -7,7 +7,10 @@ const Sidebar: React.FC = () => {
 
   const menuItems = [
     { href: "#", icon: "fa-home", label: "Home", active: true },
-    { href: "#", icon: "fa-book", label: "Learn" },
+    { href: "#", icon: "fa-user-graduate", label: "Etudiants" },
+    { href: "#", icon: "fa-code", label: "Jeunes développeurs" },
+    { href: "#", icon: "fa-paint-brush", label: "Designers" },
+    { href: "#", icon: "fa-chart-bar", label: "Data Scientists" },
     { href: "#", icon: "fa-pencil-alt", label: "Practice" },
   ];
 
@@ -60,8 +63,8 @@ const Sidebar: React.FC = () => {
           padding: "1.5rem",
           transition: "margin-left 0.3s ease",
           width: "100%",
-        }}>
-      </main>
+        }}
+      ></main>
     </div>
   );
 };
