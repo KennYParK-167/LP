@@ -1,18 +1,28 @@
 import React, { useState } from "react";
 
-const Sidebar: React.FC = () => {
+interface SidebarProps {
+  onSelect: (section: string) => void; // Fonction pour changer la section
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ onSelect }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const [activeLabel, setActiveLabel] = useState("Home"); // Gère l'élément actif
 
   const toggleSidebar = () => setCollapsed(!collapsed);
 
   const menuItems = [
-    { href: "#", icon: "fa-home", label: "Home", active: true },
-    { href: "#", icon: "fa-user-graduate", label: "Etudiants" },
-    { href: "#", icon: "fa-code", label: "Jeunes développeurs" },
-    { href: "#", icon: "fa-paint-brush", label: "Designers" },
-    { href: "#", icon: "fa-chart-bar", label: "Data Scientists" },
-    { href: "#", icon: "fa-pencil-alt", label: "Practice" },
+    { icon: "fa-home", label: "Home" },
+    { icon: "fa-user-graduate", label: "Etudiants" },
+    { icon: "fa-code", label: "Jeunes développeurs" },
+    { icon: "fa-paint-brush", label: "Designers" },
+    { icon: "fa-chart-bar", label: "Data Scientists" },
+    { icon: "fa-pencil-alt", label: "Practice" },
   ];
+
+  const handleClick = (label: string) => {
+    setActiveLabel(label);   // Met à jour le style actif
+    onSelect(label);         // Notifie le parent
+  };
 
   return (
     <div className="d-flex" style={{ minHeight: "100vh" }}>
@@ -41,30 +51,27 @@ const Sidebar: React.FC = () => {
         </button>
 
         <div className="nav flex-column flex-grow-1 px-1">
-          {menuItems.map(({ href, icon, label, active }) => (
-            <a
+          {menuItems.map(({ icon, label }) => (
+            <button
               key={label}
-              href={href}
+              onClick={() => handleClick(label)}
               className={`nav-link text-white d-flex align-items-center px-3 py-2 rounded ${
-                active ? "bg-dark" : ""
+                activeLabel === label ? "bg-dark" : ""
               }`}
-              style={{ whiteSpace: "nowrap" }}
+              style={{
+                whiteSpace: "nowrap",
+                border: "none",
+                background: "transparent",
+                textAlign: "left",
+                cursor: "pointer",
+              }}
             >
               <i className={`fas ${icon} me-3`} style={{ minWidth: 20 }}></i>
               {!collapsed && <span>{label}</span>}
-            </a>
+            </button>
           ))}
         </div>
       </nav>
-
-      <main
-        style={{
-          marginLeft: collapsed ? 70 : 250,
-          padding: "1.5rem",
-          transition: "margin-left 0.3s ease",
-          width: "100%",
-        }}
-      ></main>
     </div>
   );
 };
