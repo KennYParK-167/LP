@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./navbar.css"
 
 interface SidebarProps {
   onSelect: (section: string) => void; // Fonction pour changer la section
@@ -27,7 +28,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelect }) => {
   return (
     <div className="d-flex" style={{ minHeight: "100vh" }}>
       <nav
-        className={`d-flex flex-column flex-shrink-0 position-fixed bg-secondary text-white ${
+        className={`d-flex flex-column flex-shrink-0 position-fixed sidebar text-white ${
           collapsed ? "collapsed" : ""
         }`}
         style={{

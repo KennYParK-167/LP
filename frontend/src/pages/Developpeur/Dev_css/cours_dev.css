@@ -1,0 +1,80 @@
+/* ===============================
+   THEME JEUNE DEVELOPPEUR
+   =============================== */
+:root {
+  /* Couleurs principales */
+  --jd-primary: #026773;
+  --jd-primary-light: #e6f4f7;
+  --jd-primary-hover: #014f57;
+
+  /* Neutres */
+  --jd-secondary: #6c757d;
+  --jd-bg: #f4f6f9;
+  --jd-card-bg: #ffffff;
+  --jd-border: #e0e6ed;
+
+  /* Textes */
+  --jd-title: #1f2933;
+  --jd-text: #374151;
+  --jd-muted: #6b7280;
+}
+
+/* ===============================
+   Cartes (dashboard + courses)
+   =============================== */
+.jd-card {
+  background-color: var(--jd-card-bg);
+  border-radius: 0.8rem;
+  border: 1px solid var(--jd-border);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  transition: all 0.25s ease;
+}
+
+.jd-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(2, 103, 115, 0.15);
+}
+
+/* ===============================
+   Titres
+   =============================== */
+.jd-title {
+  color: var(--jd-primary);
+  font-weight: 600;
+}
+
+/* ===============================
+   Boutons
+   =============================== */
+.btn-jd {
+  background-color: var(--jd-primary);
+  border: none;
+  color: white;
+  font-weight: 500;
+}
+
+.btn-jd:hover {
+  background-color: var(--jd-primary-hover);
+}
+
+/* ===============================
+   Progress bar
+   =============================== */
+.progress-jd {
+  background-color: var(--jd-primary-light);
+}
+
+.progress-jd .progress-bar {
+  background-color: var(--jd-primary);
+}
+
+/* ===============================
+   Badge niveau
+   =============================== */
+.jd-badge {
+  background-color: var(--jd-primary-light);
+  color: var(--jd-primary);
+  font-size: 0.8rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+}

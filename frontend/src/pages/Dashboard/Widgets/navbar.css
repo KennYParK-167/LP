@@ -1,0 +1,25 @@
+/* ===== Sidebar principale ===== */
+.sidebar {
+  background: #486966;
+  /* bleu bootstrap moderne */
+}
+
+/* Lien actif */
+.sidebar .nav-link.bg-dark {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Hover */
+.sidebar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Bouton collapse */
+.sidebar button.btn-dark {
+  background-color: #026773;
+  border: none;
+}
+
+.sidebar button.btn-dark:hover {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+}

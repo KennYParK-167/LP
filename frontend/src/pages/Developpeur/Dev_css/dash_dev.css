@@ -1,0 +1,51 @@
+/* Couleurs principales */
+:root {
+  --primary-color: #026773;
+  --primary-light: #cce5ff;
+  --secondary-color: #6c757d;
+  --card-bg: #f8f9fa;
+}
+
+/* Style des cartes */
+.card-custom {
+  background-color: var(--card-bg);
+  border-radius: 0.8rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-custom:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Progress bar personnalisée */
+.progress-bar-custom {
+  background-color: var(--primary-color);
+}
+
+/* Boutons bleus */
+.btn-primary-custom {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary-custom:hover {
+  background-color: #C2C0A6;
+  border-color: var(--primary-color);
+}
+
+/* Titres */
+h2, h5 {
+  color: var(--primary-color);
+}
+
+/* Liste d’exercices */
+.list-group-item-custom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.5rem;
+  margin-bottom: 0.3rem;
+}
