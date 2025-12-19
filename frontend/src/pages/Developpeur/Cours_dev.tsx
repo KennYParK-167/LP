@@ -1,21 +1,74 @@
 import React from "react";
+import "./Dev_css/cours_dev.css";
 
 const courses = [
-  { title: "HTML & CSS", level: "Débutant" },
-  { title: "JavaScript – Bases", level: "Débutant" },
-  { title: "React – Introduction", level: "Intermédiaire" },
-  { title: "Node.js – Backend", level: "Intermédiaire" },
+  {
+    title: "HTML & CSS",
+    instructor: "Structure et style, codez votre monde",
+    students: "120+ Students",
+    coursesCount: "4 courses",
+  },
+  {
+    title: "JAVA",
+    instructor: "Java, le langage qui fait tourner le monde",
+    students: "120+ Students",
+    coursesCount: "4 courses",
+  },
+  {
+    title: "PHP",
+    instructor: "Du serveur au navigateur, PHP fait le lien",
+    students: "120+ Students",
+    coursesCount: "4 courses",
+  },
 ];
+
+const courseHeaderImages = [
+  "/images/html_css.jpg",
+  "/images/java.jpg",
+  "/images/php.jpg",
+];
+
 
 const JD_Courses: React.FC = () => {
   return (
-    <div className="row g-3">
-      {courses.map((course) => (
-        <div key={course.title} className="col-md-6 col-lg-4">
-          <div className="card p-3 shadow-sm">
-            <h5>{course.title}</h5>
-            <small className="text-muted">{course.level}</small>
-            <button className="btn btn-primary btn-sm mt-2">Commencer</button>
+    <div className="row g-4">
+      {courses.map((course, index) => (
+        <div key={index} className="col-md-6 col-lg-4">
+          <div className="jd-course-card shadow-sm">
+            
+            {/* En-tête de la carte avec prix */}
+            <div className="jd-course-header">
+              <img 
+                src={courseHeaderImages[index] || "/images/default-header.jpg"}
+                alt={course.title}
+                className="jd-course-header-img"
+              />
+            </div>
+
+            {/* Contenu principal */}
+            <div className="jd-course-body">
+              <h5 className="jd-course-title">{course.title}</h5>
+              <p className="jd-course-instructor">{course.instructor}</p>
+
+              {/* Métadonnées */}
+              <div className="jd-course-meta">
+                <div className="jd-meta-item">
+                  <span className="jd-meta-icon">📚</span>
+                  <span>{course.coursesCount}</span>
+                </div>
+                <div className="jd-meta-item">
+                  <span className="jd-meta-icon">👥</span>
+                  <span>{course.students}</span>
+                </div>
+              </div>
+
+              {/* Bouton d'action */}
+              <button 
+                className="btn btn-jd w-100 mt-3"
+              >
+                Enroll Now
+              </button>
+            </div>
           </div>
         </div>
       ))}
