@@ -1,5 +1,5 @@
 import React from "react";
-import "./Dev_css/cours_dev.css";
+import "./Data_css/cours_data.css";
 
 const courses_data = [
   {

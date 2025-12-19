@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import "./Dev_css/dash_dev.css";
-import "./Dev_css/cours_dev.css";
-import Cours_data from "./Cours_data";
+import "./Data_css/dash_data.css";
+import "./Data_css/cours_data.css";
 import Dash_data from "./Dash_data";
-import Exo_data from "./Exo_data"
+import Cours_data from "./Cours_data";
+import Exo_data from "./Exo_data";
 
 const Data: React.FC = () => {
   const [tab, setTab] = useState<"dashboard" | "courses" | "exercises">("dashboard");
 
   return (
     <div>
-      <h2 className="mb-4">Parcours Jeune Développeur</h2>
+      <h2 className="mb-4">Parcours Data science</h2>
 
       {/* Onglets internes */}
       <div className="btn-group mb-4">

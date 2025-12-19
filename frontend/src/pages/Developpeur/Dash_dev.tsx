@@ -1,4 +1,5 @@
 import React from "react";
+import "./Dev_css/dash_dev.css"
 
 const JD_Dashboard: React.FC = () => {
   const stats = {
