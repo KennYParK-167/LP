@@ -1,11 +1,14 @@
 import React from "react";
 
 const exercises_data = [
-  "Créer une page HTML simple",
-  "Manipuler le DOM avec JavaScript",
-  "Créer un composant React",
-  "Connexion API avec fetch",
-  "Mini-projet React : To-Do List",
+  "Calculer la moyenne d’un ensemble de nombres",
+  "Trouver la médiane",
+  "Valeurs / Vecteurs propres",
+  "Classification binaire",
+  "Validation croisée",
+  "Boxplot clair",
+  "Courbe temporelle",
+  "Histogramme simple",
 ];
 
 const DT_Exercises: React.FC = () => {

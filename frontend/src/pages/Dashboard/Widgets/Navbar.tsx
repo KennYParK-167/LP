@@ -17,7 +17,6 @@ const Sidebar: React.FC<SidebarProps> = ({ onSelect }) => {
     { icon: "fa-code", label: "Jeunes développeurs" },
     { icon: "fa-paint-brush", label: "Designers" },
     { icon: "fa-chart-bar", label: "Data Scientists" },
-    { icon: "fa-pencil-alt", label: "Practice" },
   ];
 
   const handleClick = (label: string) => {

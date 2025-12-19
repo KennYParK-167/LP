@@ -1,11 +1,14 @@
 import React from "react";
 
 const exercises_etude = [
-  "Créer une page HTML simple",
-  "Manipuler le DOM avec JavaScript",
-  "Créer un composant React",
-  "Connexion API avec fetch",
-  "Mini-projet React : To-Do List",
+  "Lancer un dé équilibré",
+  "Multiplier matrice × vecteur",
+  "Table de vérité ET / OU",
+  "Négation d’une proposition",
+  "Calcul de pourcentages",
+  "Résoudre une équation du 2nd degré",
+  "Calcul de dérivée simple",
+  "Intégrale définie d’une fonction polynomiale",
 ];
 
 const ET_Exercises: React.FC = () => {

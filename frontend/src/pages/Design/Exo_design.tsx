@@ -1,11 +1,10 @@
 import React from "react";
 
 const exercises_design = [
-  "Créer une page HTML simple",
-  "Manipuler le DOM avec JavaScript",
-  "Créer un composant React",
-  "Connexion API avec fetch",
-  "Mini-projet React : To-Do List",
+  "Refaire un bouton moderne",
+  "Choisir 3 couleurs cohérentes",
+  "Dessiner un logo en 10 minutes",
+  "Créer une icône simple",
 ];
 
 const DS_Exercises: React.FC = () => {
