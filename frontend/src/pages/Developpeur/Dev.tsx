@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Dev_css/dash_dev.css";
-import "./Dev_css/cours_dev.css"
+import "./Dev_css/cours_dev.css";
 import Dash_dev from "./Dash_dev";
 import Cours_dev from "./Cours_dev";
 import Exo_dev from "./Exo_dev";
