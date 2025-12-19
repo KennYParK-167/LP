@@ -4,69 +4,69 @@ import "./Dev_css/cours_dev.css";
 const courses = [
   {
     title: "HTML & CSS",
-    tutorials: 35,
-    dailyTime: "02:30 h / jour",
-    progress: 65,
+    instructor: "Structure et style, codez votre monde",
+    students: "120+ Students",
+    coursesCount: "4 courses",
   },
   {
-    title: "JavaScript – Bases",
-    tutorials: 120,
-    dailyTime: "02:00 h / jour",
-    progress: 30,
+    title: "JAVA",
+    instructor: "Java, le langage qui fait tourner le monde",
+    students: "120+ Students",
+    coursesCount: "4 courses",
   },
   {
-    title: "React – Introduction",
-    tutorials: 55,
-    dailyTime: "03:00 h / jour",
-    progress: 88,
+    title: "PHP",
+    instructor: "Du serveur au navigateur, PHP fait le lien",
+    students: "120+ Students",
+    coursesCount: "4 courses",
   },
 ];
+
+const courseHeaderImages = [
+  "/images/html_css.jpg",
+  "/images/java.jpg",
+  "/images/php.jpg",
+];
+
 
 const JD_Courses: React.FC = () => {
   return (
     <div className="row g-4">
-      {courses.map((course) => (
-        <div key={course.title} className="col-md-6 col-lg-4">
-          <div className="jd-course-card">
+      {courses.map((course, index) => (
+        <div key={index} className="col-md-6 col-lg-4">
+          <div className="jd-course-card shadow-sm">
             
-            {/* Image / Illustration */}
-            <div className="jd-course-img">
-              <span>{course.title.split(" ")[0]}</span>
+            {/* En-tête de la carte avec prix */}
+            <div className="jd-course-header">
+              <img 
+                src={courseHeaderImages[index] || "/images/default-header.jpg"}
+                alt={course.title}
+                className="jd-course-header-img"
+              />
             </div>
 
-            {/* Contenu */}
+            {/* Contenu principal */}
             <div className="jd-course-body">
-              <h5>{course.title}</h5>
+              <h5 className="jd-course-title">{course.title}</h5>
+              <p className="jd-course-instructor">{course.instructor}</p>
 
+              {/* Métadonnées */}
               <div className="jd-course-meta">
-                <span>📘 {course.tutorials} tutoriels</span>
-                <span>⏱ {course.dailyTime}</span>
+                <div className="jd-meta-item">
+                  <span className="jd-meta-icon">📚</span>
+                  <span>{course.coursesCount}</span>
+                </div>
+                <div className="jd-meta-item">
+                  <span className="jd-meta-icon">👥</span>
+                  <span>{course.students}</span>
+                </div>
               </div>
 
-              {/* Progression */}
-              <div className="jd-progress-circle">
-                <svg viewBox="0 0 36 36">
-                  <path
-                    className="bg"
-                    d="M18 2.0845
-                      a 15.9155 15.9155 0 0 1 0 31.831
-                      a 15.9155 15.9155 0 0 1 0 -31.831"
-                  />
-                  <path
-                    className="progress"
-                    strokeDasharray={`${course.progress}, 100`}
-                    d="M18 2.0845
-                      a 15.9155 15.9155 0 0 1 0 31.831
-                      a 15.9155 15.9155 0 0 1 0 -31.831"
-                  />
-                  <text x="18" y="21" className="percentage">
-                    {course.progress}%
-                  </text>
-                </svg>
-              </div>
-
-              <button className="btn btn-jd w-100 mt-3">
-                Continuer
+              {/* Bouton d'action */}
+              <button 
+                className="btn btn-jd w-100 mt-3"
+              >
+                Enroll Now
               </button>
             </div>
           </div>
