@@ -1,113 +1,161 @@
 import express from 'express';
+import http from 'http';
+import { Server } from 'socket.io';
 import cors from 'cors';
-import mysql from 'mysql2/promise';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 
+// Configuration dotenv
 dotenv.config();
 
 const app = express();
 
-// Middlewares
-app.use(cors());
+// Pour utiliser __dirname en ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const server = http.createServer(app);
+
+// Configuration CORS
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173', // Vite
+  'http://127.0.0.1:3000',
+];
+
+const io = new Server(server, {
+  cors: {
+    origin: function(origin, callback) {
+      // Permettre les requêtes sans origine (comme Postman, curl)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg = `L'origine ${origin} n'est pas autorisée par CORS`;
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true,
+  },
+  transports: ['websocket', 'polling'],
+});
+
+// Middleware
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Variables d'environnement
-const PORT = process.env.PORT || 5000;
-const DB_CONFIG = {
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'learning_db',
-  port: process.env.DB_PORT || 3306
-};
-
-// Connexion MySQL
-let db;
-async function connectToDatabase() {
-  try {
-    console.log(' Tentative de connexion MySQL...');
-    db = await mysql.createConnection(DB_CONFIG);
-    console.log(' MySQL connecté avec succès!');
-    console.log(` Base de données: ${DB_CONFIG.database}`);
-    return db;
-  } catch (error) {
-    console.error(' Erreur de connexion MySQL:', error.message);
-    console.log(' Conseil: Vérifiez que MySQL est démarré');
-    process.exit(1);
-  }
-}
-
-// Route test
-app.get('/', (req, res) => {
-  res.json({
-    project: 'Hackathon Décembre',
-    version: '1.0.0',
-    status: 'online',
-    endpoints: ['GET /', 'GET /api/health', 'GET /api/test-db']
-  });
-});
-
-// Route santé API
+// Routes API
 app.get('/api/health', (req, res) => {
-  res.json({
-    status: 'healthy',
+  res.json({ status: 'OK', message: 'Server is running' });
+});
+
+app.get('/api/users', (req, res) => {
+  res.json([
+    { id: 1, name: 'John Doe', email: 'john@example.com' },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
+  ]);
+});
+
+app.post('/api/messages', (req, res) => {
+  const { message } = req.body;
+  if (!message) {
+    return res.status(400).json({ error: 'Message is required' });
+  }
+  
+  // Émettre à tous les clients via Socket.io
+  io.emit('new_message', {
+    id: Date.now(),
+    message,
     timestamp: new Date().toISOString(),
-    database: db ? 'connected' : 'disconnected'
   });
+  
+  res.json({ success: true, message: 'Message envoyé' });
 });
 
-// Test connexion DB
-app.get('/api/test-db', async (req, res) => {
-  try {
-    const [rows] = await db.execute('SELECT 1 + 1 as result');
-    res.json({
-      database: 'MySQL',
-      status: 'working',
-      test: rows[0].result,
-      connection: 'success'
-    });
-  } catch (error) {
-    res.status(500).json({
-      error: 'Database error',
-      message: error.message
-    });
-  }
-});
-
-// Gestion erreurs 404
-app.use((req, res) => {
-  res.status(404).json({
-    error: 'Not Found',
-    message: `Route ${req.method} ${req.url} non trouvée`
+// Gestion des connexions Socket.io
+io.on('connection', (socket) => {
+  console.log(` Nouveau client connecté: ${socket.id}`);
+  
+  // Envoyer un message de bienvenue
+  socket.emit('welcome', {
+    message: 'Bienvenue sur le serveur!',
+    socketId: socket.id,
+    timestamp: new Date().toISOString(),
   });
-});
-
-// Démarrage serveur
-async function startServer() {
-  try {
-    // Connecter à la DB
-    await connectToDatabase();
+  
+  // Écouter les messages du client
+  socket.on('chat_message', (data) => {
+    console.log(` Message de ${socket.id}:`, data);
     
-    // Démarrer serveur
-    app.listen(PORT, () => {
-      console.log('\n' + '='.repeat(50));
-      console.log(` SERVEUR HACKATHON DÉMARRÉ`);
-      console.log(` Port: ${PORT}`);
-      console.log(` Fichier: server.mjs`);
-      console.log(`URL: http://localhost:${PORT}`);
-      console.log(`  MySQL: ${DB_CONFIG.host}:${DB_CONFIG.port}`);
-      console.log('='.repeat(50) + '\n');
-      
-      console.log(' Endpoints disponibles:');
-      console.log(`  GET http://localhost:${PORT}/`);
-      console.log(`  GET http://localhost:${PORT}/api/health`);
-      console.log(`  GET http://localhost:${PORT}/api/test-db`);
+    // Créer un objet message avec métadonnées
+    const messageObj = {
+      id: Date.now(),
+      socketId: socket.id,
+      text: data.text,
+      user: data.user || 'Anonymous',
+      timestamp: new Date().toISOString(),
+    };
+    
+    // Diffuser à tous les clients
+    io.emit('chat_message', messageObj);
+  });
+  
+  // Gestion des rooms
+  socket.on('join_room', (roomName) => {
+    socket.join(roomName);
+    console.log(`${socket.id} a rejoint la room: ${roomName}`);
+    socket.to(roomName).emit('user_joined', {
+      socketId: socket.id,
+      room: roomName,
     });
-  } catch (error) {
-    console.error(' Erreur démarrage serveur:', error);
-    process.exit(1);
-  }
+  });
+  
+  socket.on('leave_room', (roomName) => {
+    socket.leave(roomName);
+    console.log(`${socket.id} a quitté la room: ${roomName}`);
+  });
+  
+  socket.on('room_message', ({ room, text, user }) => {
+    const messageObj = {
+      id: Date.now(),
+      socketId: socket.id,
+      text,
+      user: user || 'Anonymous',
+      room,
+      timestamp: new Date().toISOString(),
+    };
+    
+    // Envoyer uniquement aux clients dans la room
+    io.to(room).emit('room_message', messageObj);
+  });
+  
+  socket.on('disconnect', (reason) => {
+    console.log(` Client déconnecté: ${socket.id} - Raison: ${reason}`);
+  });
+  
+  socket.on('error', (error) => {
+    console.error(`Socket error (${socket.id}):`, error);
+  });
+});
+
+// Servir les fichiers statiques en production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/build')));
+  
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+  });
 }
 
-// Lancer l'application
-startServer();
+const PORT = process.env.PORT || 5000;
+
+server.listen(PORT, () => {
+  console.log(` Serveur démarré sur le port ${PORT}`);
+  console.log(` Socket.io disponible sur: ws://localhost:${PORT}`);
+  console.log(` Environnement: ${process.env.NODE_ENV || 'development'}`);
+});
