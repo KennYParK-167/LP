@@ -3,29 +3,29 @@ import "./Data_css/cours_data.css";
 
 const courses_data = [
   {
-    title: "HTML & CSS",
-    instructor: "Structure et style, codez votre monde",
+    title: "Analyse de données",
+    instructor: "Transformer les données en décisions",
     students: "120+ Students",
     coursesCount: "4 courses",
   },
   {
-    title: "JAVA",
-    instructor: "Java, le langage qui fait tourner le monde",
+    title: "Machine learning",
+    instructor: "Les données entraînent l’intelligence",
     students: "120+ Students",
     coursesCount: "4 courses",
   },
   {
-    title: "PHP",
-    instructor: "Du serveur au navigateur, PHP fait le lien",
+    title: "Vision par ordinateur",
+    instructor: "Les machines voient tout",
     students: "120+ Students",
     coursesCount: "4 courses",
   },
 ];
 
 const courseHeaderImages_data = [
-  "/images/html_css.jpg",
-  "/images/java.jpg",
-  "/images/php.jpg",
+  "/images/analyst.jpg",
+  "/images/learning.jpg",
+  "/images/vision.jpeg",
 ];
 
 

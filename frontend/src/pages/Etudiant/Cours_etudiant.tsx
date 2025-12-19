@@ -3,29 +3,29 @@ import "./Etudiant_css/cours_etude.css";
 
 const courses_etude = [
   {
-    title: "HTML & CSS",
-    instructor: "Structure et style, codez votre monde",
+    title: "Probabilité",
+    instructor: "Comprendre le hasard, maîtriser les chances",
     students: "120+ Students",
     coursesCount: "4 courses",
   },
   {
-    title: "JAVA",
-    instructor: "Java, le langage qui fait tourner le monde",
+    title: "Algèbre linéaire",
+    instructor: "Quand les matrices donnent des réponses",
     students: "120+ Students",
     coursesCount: "4 courses",
   },
   {
-    title: "PHP",
-    instructor: "Du serveur au navigateur, PHP fait le lien",
+    title: "Statisqtique",
+    instructor: "Derrière chaque donnée, une histoire",
     students: "120+ Students",
     coursesCount: "4 courses",
   },
 ];
 
 const courseHeaderImages_etude = [
-  "/images/html_css.jpg",
-  "/images/java.jpg",
-  "/images/php.jpg",
+  "/images/proba.jpg",
+  "/images/linear.jpg",
+  "/images/stat.jpg",
 ];
 
 
