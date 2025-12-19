@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import Sidebar from "./Widgets/Navbar";
+import Design from "../Design/Design";
 import Dev from "../Developpeur/Dev";
 import Home from "./Widgets/Home";
+import Data from "../Data/Data";
+import Etudiant from "../Etudiant/Etudiant";
+
 
 const Dashboard: React.FC = () => {
   const [section, setSection] = useState("Home");
@@ -20,9 +24,9 @@ const Dashboard: React.FC = () => {
       >
         {section === "Home" && <Home />}
         {section === "Jeunes développeurs" && <Dev />}
-        {section === "Etudiants" && <h2>Dashboard Étudiants</h2>}
-        {section === "Designers" && <h2>Dashboard Designers</h2>}
-        {section === "Data Scientists" && <h2>Dashboard Data Scientists</h2>}
+        {section === "Etudiants" && <Etudiant />}
+        {section === "Designers" && <Design />}
+        {section === "Data Scientists" && <Data />}
         {section === "Practice" && <h2>Exercices généraux</h2>}
       </main>
     </div>

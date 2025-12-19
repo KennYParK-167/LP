@@ -1,96 +1,79 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import "./Dev_css/cours_dev.css";
 
-interface Recommendation {
-  title: string;
-  platform: string;
-  reason: string;
-  url: string;
-}
+const courses = [
+  {
+    title: "HTML & CSS",
+    instructor: "Structure et style, codez votre monde",
+    students: "120+ Students",
+    coursesCount: "4 courses",
+  },
+  {
+    title: "JAVA",
+    instructor: "Java, le langage qui fait tourner le monde",
+    students: "120+ Students",
+    coursesCount: "4 courses",
+  },
+  {
+    title: "PHP",
+    instructor: "Du serveur au navigateur, PHP fait le lien",
+    students: "120+ Students",
+    coursesCount: "4 courses",
+  },
+];
 
-const Cours_dev: React.FC = () => {
-  const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
-  const [loading, setLoading] = useState(false);
+const courseHeaderImages = [
+  "/images/html_css.jpg",
+  "/images/java.jpg",
+  "/images/php.jpg",
+];
 
-  // Fonction déclenchée quand on clique sur "Commencer" un cours local
-  const handleStartCourse = async (courseTitle: string) => {
-    try {
-      // 1. On informe le serveur du choix (pour l'historique SQL)
-      await fetch("http://localhost:5000/api/course/activity", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title: courseTitle, category: "Développement" }),
-      });
 
-      // 2. On rafraîchit les recommandations IA basées sur ce nouvel historique
-      fetchRecommendations();
-      
-      alert(`Démarrage du cours : ${courseTitle}`);
-    } catch (error) {
-      console.error("Erreur activité:", error);
-    }
-  };
-
-  const fetchRecommendations = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch("http://localhost:5000/api/course/recommendations");
-      const data = await res.json();
-      setRecommendations(Array.isArray(data) ? data : []);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchRecommendations();
-  }, []);
-
+const JD_Courses: React.FC = () => {
   return (
-    <div className="cours-container">
-      <h3>Mes Cours de Développement</h3>
-      
-      {/* Liste de vos cours locaux */}
-      <div className="row mb-5">
-        <div className="col-md-4">
-          <div className="card p-3 shadow-sm">
-            <h5>HTML/CSS Fondamentaux</h5>
-            <button 
-              className="btn btn-primary-custom mt-2"
-              onClick={() => handleStartCourse("HTML/CSS Fondamentaux")}
-            >
-              Commencer
-            </button>
-          </div>
-        </div>
-        {/* Ajoutez d'autres cartes ici... */}
-      </div>
+    <div className="row g-4">
+      {courses.map((course, index) => (
+        <div key={index} className="col-md-6 col-lg-4">
+          <div className="jd-course-card shadow-sm">
+            
+            {/* En-tête de la carte avec prix */}
+            <div className="jd-course-header">
+              <img 
+                src={courseHeaderImages[index] || "/images/default-header.jpg"}
+                alt={course.title}
+                className="jd-course-header-img"
+              />
+            </div>
 
-      <hr />
+            {/* Contenu principal */}
+            <div className="jd-course-body">
+              <h5 className="jd-course-title">{course.title}</h5>
+              <p className="jd-course-instructor">{course.instructor}</p>
 
-      {/* Section Recommandations IA */}
-      <div className="recom-section mt-4">
-        <h4>Suggéré pour vous par l'IA</h4>
-        {loading ? (
-          <p>Chargement des suggestions...</p>
-        ) : (
-          <div className="row">
-            {recommendations.map((rec, index) => (
-              <div key={index} className="col-md-4 mb-3">
-                <div className="card h-100 border-primary p-3">
-                  <small className="text-primary fw-bold">{rec.platform}</small>
-                  <h6 className="mt-2">{rec.title}</h6>
-                  <p className="small text-muted italic">{rec.reason}</p>
-                  <a href={rec.url} target="_blank" rel="noreferrer" className="btn btn-sm btn-outline-primary">
-                    Voir la ressource
-                  </a>
+              {/* Métadonnées */}
+              <div className="jd-course-meta">
+                <div className="jd-meta-item">
+                  <span className="jd-meta-icon">📚</span>
+                  <span>{course.coursesCount}</span>
+                </div>
+                <div className="jd-meta-item">
+                  <span className="jd-meta-icon">👥</span>
+                  <span>{course.students}</span>
                 </div>
               </div>
-            ))}
+
+              {/* Bouton d'action */}
+              <button 
+                className="btn btn-jd w-100 mt-3"
+              >
+                Enroll Now
+              </button>
+            </div>
           </div>
-        )}
-      </div>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default Cours_dev;
+export default JD_Courses;

@@ -1,0 +1,110 @@
+.btn-primary-custom {
+  background-color: #026773;
+  border-color: #026773;
+  color: white;
+}
+
+.btn-primary-custom:hover {
+  background-color: #C2C0A6;
+  border-color: #026773;
+}
+
+.jd-course-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.jd-course-header {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.jd-course-header-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.jd-course-body {
+  padding: 20px;
+}
+
+.jd-course-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  min-height: 50px;
+}
+
+.jd-course-instructor {
+  color: #718096;
+  font-size: 14px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.jd-course-meta {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding: 15px 0;
+  border-top: 1px solid #e9ecef;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.jd-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #4a5568;
+  font-size: 14px;
+}
+
+.jd-meta-icon {
+  font-size: 16px;
+}
+
+.btn-jd {
+  background: #026773;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-jd:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  color: black;
+  background-color: #C2C0A6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .jd-course-title {
+    font-size: 16px;
+    min-height: auto;
+  }
+  
+  .jd-course-meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .jd-course-price {
+    font-size: 18px;
+    padding: 4px 12px;
+  }
+}
