@@ -1,4 +1,4 @@
-import db from "../config/db.js";
+import db from "../db.js";
 
 export const createReminder = async (req, res) => {
   const { message, remind_at } = req.body;

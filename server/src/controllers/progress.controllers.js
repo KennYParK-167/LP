@@ -1,4 +1,4 @@
-import db from "../config/db.js";
+import db from "../db.js";
 
 export const updateProgress = async (req, res) => {
   const { course_id, progress } = req.body;

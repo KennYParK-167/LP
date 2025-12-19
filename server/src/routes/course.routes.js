@@ -6,5 +6,8 @@ const router = express.Router();
 
 router.get("/", getCourses);
 router.post("/", authMiddleware, createCourse);
+router.post("/activity", authMiddleware, saveActiviy);
+router.get("/recommendations", authMiddleware, getRecommendations);
 
 export default router;
+
