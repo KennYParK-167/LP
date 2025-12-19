@@ -3,29 +3,29 @@ import "./Design_css/cours_design.css";
 
 const courses_design = [
   {
-    title: "HTML & CSS",
-    instructor: "Structure et style, codez votre monde",
+    title: "UX & UI",
+    instructor: "Penser l’expérience, façonner l’interface",
     students: "120+ Students",
     coursesCount: "4 courses",
   },
   {
-    title: "JAVA",
-    instructor: "Java, le langage qui fait tourner le monde",
+    title: "Figma",
+    instructor: "Là où les idées prennent forme",
     students: "120+ Students",
     coursesCount: "4 courses",
   },
   {
-    title: "PHP",
-    instructor: "Du serveur au navigateur, PHP fait le lien",
+    title: "Montage vidéo",
+    instructor: "Coupez, Assemblez, Émotion",
     students: "120+ Students",
     coursesCount: "4 courses",
   },
 ];
 
 const courseHeaderImages_design = [
-  "/images/html_css.jpg",
-  "/images/java.jpg",
-  "/images/php.jpg",
+  "/images/ux.jpg",
+  "/images/figma.jpg",
+  "/images/video.jpg",
 ];
 
 
