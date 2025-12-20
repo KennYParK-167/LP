@@ -23,3 +23,20 @@
 .sidebar button.btn-dark:hover {
   background-color: rgba(255, 255, 255, 0.15) !important;
 }
+
+.sidebar.collapsed {
+  width: 50px !important;
+}
+
+/* Mode mobile - sidebar cachée hors écran par défaut */
+@media (max-width: 767.98px) {
+  .sidebar {
+    width: 250px !important;
+    transform: translateX(-100%);
+  }
+
+  /* Quand le menu est ouvert */
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+}

@@ -36,7 +36,6 @@ const DS_Courses: React.FC = () => {
         <div key={index} className="col-md-6 col-lg-4">
           <div className="jd-course-card shadow-sm">
             
-            {/* En-tête de la carte avec prix */}
             <div className="jd-course-header">
               <img 
                 src={courseHeaderImages_design[index] || "/images/default-header.jpg"}
@@ -45,12 +44,10 @@ const DS_Courses: React.FC = () => {
               />
             </div>
 
-            {/* Contenu principal */}
             <div className="jd-course-body">
               <h5 className="jd-course-title">{course.title}</h5>
               <p className="jd-course-instructor">{course.instructor}</p>
 
-              {/* Métadonnées */}
               <div className="jd-course-meta">
                 <div className="jd-meta-item">
                   <span className="jd-meta-icon">📚</span>
@@ -62,11 +59,10 @@ const DS_Courses: React.FC = () => {
                 </div>
               </div>
 
-              {/* Bouton d'action */}
               <button 
                 className="btn btn-jd w-100 mt-3"
               >
-                Enroll Now
+                Commencer à apprendre
               </button>
             </div>
           </div>

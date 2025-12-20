@@ -1,0 +1,21 @@
+.app-layout {
+  min-height: 100vh;
+}
+
+/* On suppose que Sidebar gère sa largeur */
+
+.content {
+  margin-left: 250px; /* largeur sidebar non réduite */
+  transition: margin-left 0.3s ease;
+}
+
+.app-layout .sidebar.collapsed ~ .content {
+  margin-left: 70px; /* largeur sidebar réduite */
+}
+
+/* Pour mobile : on enlève le margin-left */
+@media (max-width: 768px) {
+  .content {
+    margin-left: 0 !important;
+  }
+}
